@@ -80,7 +80,6 @@ object Main {
     val streamData = flumeStream.flatMap(getDataFromFlume)
     streamData.print(10)
     streamData.foreachRDD { rdd =>
-
       if (!rdd.isEmpty()) {
         // Convert RDD[String] to DataFrame
         val currentDF = sqlContext.jsonRDD(rdd)

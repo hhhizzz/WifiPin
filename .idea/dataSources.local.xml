@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Hive - wifi_pin@localhost" uuid="7edb388b-9567-4c29-84ad-dbf6812bcb12">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>spark</user-name>
+    </data-source>
+  </component>
+</project>

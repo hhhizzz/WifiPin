@@ -78,6 +78,7 @@ object Main {
 
     val flumeStream = FlumeUtils.createStream(ssc, "master.com", 7777, StorageLevel.MEMORY_ONLY) //从localhost:7777获取flume数据
     val streamData = flumeStream.flatMap(getDataFromFlume)
+    streamData.print(10)
     streamData.foreachRDD { rdd =>
 
       if (!rdd.isEmpty()) {

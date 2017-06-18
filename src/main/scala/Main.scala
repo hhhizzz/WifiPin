@@ -85,7 +85,7 @@ object Main {
         val currentDF = sqlContext.jsonRDD(rdd)
         currentDF.show()
         currentDF.createOrReplaceTempView("temp")
-        sqlContext.sql("create table person as  select * from temp")
+        sqlContext.sql("insert into person select * from temp")
       }
     }
 

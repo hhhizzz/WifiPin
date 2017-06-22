@@ -47,9 +47,9 @@ object Main {
       .option("password", dbPasswd)
       .load()
 
-    ouiDF.createOrReplaceTempView("oui")
+    ouiDF.createOrReplaceTempView("ouiMySQL")
 
 
-    sql("INSERT INTO oui SELECT * FROM oui")
+    sql("INSERT INTO oui SELECT * FROM ouiMYSQL")
   }
 }

@@ -34,20 +34,22 @@ object Main {
       .appName("Spark SQL basic example")
       .getOrCreate()
 
-    val clientDF = spark.read
+    import spark.implicits._
+    import spark.sql
+    sql("use sniffer")
+
+    val ouiDF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
       .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
-      .option("dbtable", "sniffer.client")
+      .option("dbtable", "sniffer.oui")
       .option("user", dbUser)
       .option("password", dbPasswd)
       .load()
 
-    clientDF.show()
+    ouiDF.createOrReplaceTempView("oui")
 
-    import spark.implicits._
-    import spark.sql
-    sql("use wifi_pin")
-    sql("SELECT * FROM person").show()
+
+    sql("INSERT INTO oui SELECT * FROM oui")
   }
 }

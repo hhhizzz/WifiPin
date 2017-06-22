@@ -19,6 +19,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 object Main {
 
+  //从mysql数据库读取探针基础数据
   val dbUser = "root"
   val dbPasswd = "HQWhjs234135"
 
@@ -31,13 +32,11 @@ object Main {
     //    import spark.implicits._
     //    import spark.sql
     //    sql("use sniffer")
+    val newDataObject = new getNewData()
     val spark = SparkSession
       .builder()
-      .appName("Spark SQL basic example")
+      .appName("Spark Main")
       .getOrCreate()
 
-    val newDataObject = new getNewData()
-    val clientDF = newDataObject.getHistoryDF
-    clientDF.show()
   }
 }

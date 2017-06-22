@@ -34,10 +34,11 @@ object Main {
     val clientDF = spark.read
       .format("jdbc")
       .option("url", "jdbc:mysql://slave2.com")
-      .option("sniffer", "sniffer.client")
+      .option("dbtable", "sniffer.client")
       .option("user", dbUser)
       .option("password", dbPasswd)
       .load()
+
     clientDF.show()
   }
 }

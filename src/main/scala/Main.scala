@@ -19,12 +19,25 @@ import scala.collection.mutable.ArrayBuffer
   */
 object Main {
 
-
+  val dbUser = "root"
+  val dbPasswd = "123456"
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
-    
+    val spark = SparkSession
+      .builder()
+      .appName("Spark SQL basic example")
+      .getOrCreate()
+
+    val clientDF = spark.read
+      .format("jdbc")
+      .option("url", "jdbc:mysql://slave2.com")
+      .option("sniffer", "sniffer.client")
+      .option("user", dbUser)
+      .option("password", dbPasswd)
+      .load()
+    clientDF.show()
   }
 }

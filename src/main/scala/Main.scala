@@ -29,6 +29,8 @@ object Main {
     val sc = new SparkContext(conf)
     val spark = SparkSession
       .builder()
+      .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
+      .enableHiveSupport()
       .appName("Spark SQL basic example")
       .getOrCreate()
 
@@ -42,5 +44,10 @@ object Main {
       .load()
 
     clientDF.show()
+
+    import spark.implicits._
+    import spark.sql
+    sql("use wifi_pin")
+    sql("SELECT * FROM person").show()
   }
 }

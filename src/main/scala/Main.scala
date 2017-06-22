@@ -35,7 +35,7 @@ object Main {
     val clientDF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/")
+      .option("url", "jdbc:mysql://slave2.com/jsp_db?useUnicode=true&characterEncoding=utf-8&useSSL=false")
       .option("dbtable", "sniffer.client")
       .option("user", dbUser)
       .option("password", dbPasswd)

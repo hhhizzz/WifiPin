@@ -20,19 +20,13 @@ import scala.collection.mutable.ArrayBuffer
 object Main {
 
   val dbUser = "root"
-  val dbPasswd = "123456"
+  val dbPasswd = "HQWhjs234135"
 
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
-    val conf = new SparkConf().setAppName("Simple Application")
+    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[2]")
     val sc = new SparkContext(conf)
-    //    val spark = SparkSession
-    //      .builder()
-    //      .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
-    //      .enableHiveSupport()
-    //      .appName("Spark SQL basic example")
-    //      .getOrCreate()
     //
     //    import spark.implicits._
     //    import spark.sql
@@ -42,15 +36,8 @@ object Main {
       .appName("Spark SQL basic example")
       .getOrCreate()
 
-    val clientDF = spark.read
-      .format("jdbc")
-      .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
-      .option("dbtable", "sniffer.client")
-      .option("user", dbUser)
-      .option("password", dbPasswd)
-      .load()
+    val newDataObject = new getNewData()
+    val clientDF = newDataObject.getHistoryDF
     clientDF.show()
-
   }
 }

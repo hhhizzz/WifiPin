@@ -27,29 +27,30 @@ object Main {
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
+    //    val spark = SparkSession
+    //      .builder()
+    //      .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
+    //      .enableHiveSupport()
+    //      .appName("Spark SQL basic example")
+    //      .getOrCreate()
+    //
+    //    import spark.implicits._
+    //    import spark.sql
+    //    sql("use sniffer")
     val spark = SparkSession
       .builder()
-      .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
-      .enableHiveSupport()
       .appName("Spark SQL basic example")
       .getOrCreate()
 
-    import spark.implicits._
-    import spark.sql
-    sql("use sniffer")
-
-    val ouiDF = spark.read
+    val clientDF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
       .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
-      .option("dbtable", "sniffer.oui")
+      .option("dbtable", "sniffer.client")
       .option("user", dbUser)
       .option("password", dbPasswd)
       .load()
+    clientDF.show()
 
-    ouiDF.createOrReplaceTempView("ouiMySQL")
-
-
-    sql("INSERT INTO oui SELECT * FROM ouiMYSQL")
   }
 }

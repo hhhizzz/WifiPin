@@ -21,6 +21,7 @@ object Main {
 
   val dbUser = "root"
   val dbPasswd = "123456"
+
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
@@ -33,7 +34,8 @@ object Main {
 
     val clientDF = spark.read
       .format("jdbc")
-      .option("url", "jdbc:mysql://slave2.com")
+      .option("driver", "com.mysql.jdbc.Driver")
+      .option("url", "jdbc:mysql://slave2.com/")
       .option("dbtable", "sniffer.client")
       .option("user", dbUser)
       .option("password", dbPasswd)

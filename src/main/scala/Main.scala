@@ -34,6 +34,8 @@ object Main {
     val sc = spark.sparkContext
     val ssc = new StreamingContext(sc, Seconds(60))
 
+    val lines = ssc.socketTextStream("localhost", 28889)
+    lines.print()
 
     import spark.sql
     sql("use sniffer")
@@ -162,7 +164,7 @@ object Main {
 
     GetNewData.clearTable()
     sql("TRUNCATE TABLE client")
-    
+
     ssc.start() // Start the computation
     ssc.awaitTermination() // Wait for the computation to terminate
   }

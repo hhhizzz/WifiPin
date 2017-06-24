@@ -1,11 +1,11 @@
-import Main.{dbPasswd, dbUser}
+import Main.{dbPasswd, dbUser, dbURL}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.log4j.Logger
 
 /**
   * Created by xunixhuang on 22/06/2017.
   */
-class getNewData {
+class GetNewData {
   //    val spark = SparkSession
   //      .builder()
   //      .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
@@ -23,7 +23,7 @@ class getNewData {
     val DF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
+      .option("url", dbURL)
       .option("dbtable", "sniffer.client")
       .option("user", dbUser)
       .option("password", dbPasswd)
@@ -35,7 +35,7 @@ class getNewData {
     val DF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
+      .option("url", dbURL)
       .option("dbtable", "sniffer.power")
       .option("user", dbUser)
       .option("password", dbPasswd)
@@ -47,7 +47,7 @@ class getNewData {
     val DF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
+      .option("url", dbURL)
       .option("dbtable", "sniffer.connection")
       .option("user", dbUser)
       .option("password", dbPasswd)
@@ -59,7 +59,7 @@ class getNewData {
     val DF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
+      .option("url", dbURL)
       .option("dbtable", "sniffer.history")
       .option("user", dbUser)
       .option("password", dbPasswd)
@@ -71,7 +71,7 @@ class getNewData {
     val DF = spark.read
       .format("jdbc")
       .option("driver", "com.mysql.jdbc.Driver")
-      .option("url", "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false")
+      .option("url", dbURL)
       .option("dbtable", "sniffer.oui")
       .option("user", dbUser)
       .option("password", dbPasswd)
@@ -89,7 +89,7 @@ class getNewData {
     try {
       Class.forName("com.mysql.jdbc.Driver")
       log.info("Connecting to a selected database...")
-      conn = DriverManager.getConnection("jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false", dbUser, dbPasswd)
+      conn = DriverManager.getConnection(dbURL, dbUser, dbPasswd)
       log.info("Connected database successfully...")
       log.info("Deleting table in given database...")
       stmt = conn.createStatement()

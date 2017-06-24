@@ -19,7 +19,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
-    val conf = new SparkConf().setMaster("local[2]").setAppName("WifiPin")
+    val conf = new SparkConf().setAppName("WifiPin")
     val sc = new SparkContext(conf)
     //
     //    import spark.implicits._

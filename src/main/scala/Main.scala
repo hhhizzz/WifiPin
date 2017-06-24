@@ -137,7 +137,7 @@ object Main {
     println("The sleep activity client is " + clientPeriodSleep)
 
     //找出数据搜集时间
-    val finaltime = sql("SELECT max(time) FROM client")
+   // val finaltime = sql("SELECT max(time) FROM client")
     //定义最终数据结构
     val finalData = Data(
       new Date().getTime / 1000,

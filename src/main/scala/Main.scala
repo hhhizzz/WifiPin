@@ -18,6 +18,7 @@ object Main {
   val spark = SparkSession
     .builder()
     .appName("Spark SQL wifiPin")
+    .enableHiveSupport()
     .getOrCreate()
 
   def main(args: Array[String]): Unit = {

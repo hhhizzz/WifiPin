@@ -14,7 +14,7 @@ object Main {
   //从mysql数据库读取探针基础数据
   val dbURL = "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false"
   val dbUser = "root"
-  val dbPasswd = "HQWhjs234135"
+  val dbPasswd = "123456"
 
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")

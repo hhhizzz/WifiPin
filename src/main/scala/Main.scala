@@ -2,6 +2,8 @@ import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.sql.SparkSession
 import java.util.Date
 
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
 /**
   * Created by IZZ on 15/06/2017.
   * 程序的主入口
@@ -29,7 +31,8 @@ object Main {
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
-    //val sc = spark.sparkContext
+    val sc = spark.sparkContext
+    val ssc = new StreamingContext(sc,Seconds(60))
 
 
     import spark.sql
@@ -159,5 +162,7 @@ object Main {
 
     GetNewData.clearTable()
     sql("TRUNCATE TABLE sniffer.client")
+    ssc.start()             // Start the computation
+    ssc.awaitTermination()  // Wait for the computation to terminate
   }
 }

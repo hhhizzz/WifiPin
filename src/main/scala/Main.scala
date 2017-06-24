@@ -35,8 +35,7 @@ object Main {
 
     val clientDF = newDataObject.getClientDF
     val powerDF = newDataObject.getPowerDF
-    clientDF.createOrReplaceTempView("client")
-    newDataObject.clearTable()
+    clientDF.createOrReplaceTempView("RowClient")
     powerDF.createOrReplaceTempView("RowPower")
     sql("insert into power select * from RowPower")
 
@@ -132,5 +131,7 @@ object Main {
     println("The Mid activity client is " + clientPeriodMid)
     println("The Low activity client is " + clientPeriodLow)
     println("The sleep activity client is " + clientPeriodSleep)
+
+    newDataObject.clearTable()
   }
 }

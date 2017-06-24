@@ -1,11 +1,11 @@
 import Main.{dbPasswd, dbUser, dbURL, spark}
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.DataFrame
 import org.apache.log4j.Logger
 
 /**
   * Created by xunixhuang on 22/06/2017.
   */
-class GetNewData {
+object GetNewData {
 
   //  val spark: SparkSession = SparkSession
   //    .builder()

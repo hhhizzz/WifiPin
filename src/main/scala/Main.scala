@@ -1,6 +1,6 @@
 import org.apache.log4j.{Level, LogManager}
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SparkSession
+import java.util.Date
 
 /**
   * Created by IZZ on 15/06/2017.
@@ -14,12 +14,17 @@ object Main {
   //从mysql数据库读取探针基础数据
   val dbURL = "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false"
   val dbUser = "root"
-  val dbPasswd = "123456"
-  val spark = SparkSession
-    .builder()
-    .appName("Spark SQL wifiPin")
-    .enableHiveSupport()
-    .getOrCreate()
+  val dbPasswd = "123456" //****
+//  val spark = SparkSession
+//    .builder()
+//    .appName("Spark SQL wifiPin")
+//    .enableHiveSupport()
+//    .getOrCreate()
+val spark = SparkSession
+  .builder()
+  .appName("Spark SQL wifiPin")
+    .master("local[2]")
+  .getOrCreate()
 
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
@@ -27,16 +32,14 @@ object Main {
     //val sc = spark.sparkContext
 
 
-    import spark.implicits._
     import spark.sql
-    sql("use sniffer")
-    val newDataObject = new GetNewData()
+    //sql("use sniffer")
 
 
-    val clientDF = newDataObject.getClientDF
-    val powerDF = newDataObject.getPowerDF
-    clientDF.createOrReplaceTempView("RowClient")
-    powerDF.createOrReplaceTempView("RowPower")
+    val clientDF = GetNewData.getClientDF
+    val powerDF = GetNewData.getPowerDF
+    clientDF.createOrReplaceTempView("RowClient") //***
+    powerDF.createOrReplaceTempView("RowPower")   //***
     sql("insert into client select * from RowClient")
     sql("insert into power select * from RowPower")
 
@@ -133,7 +136,28 @@ object Main {
     println("The Low activity client is " + clientPeriodLow)
     println("The sleep activity client is " + clientPeriodSleep)
 
-    newDataObject.clearTable()
+    //找出数据搜集时间
+    val finaltime = sql("SELECT max(time) FROM client")
+    //定义最终数据结构
+    val finalData = Data(
+      new Date().getTime / 1000,
+      "test",
+      clientNumber,
+      inputClientNumber,
+      period,
+      oldClientNumber,
+      inputClientNumber - oldClientNumber,
+      hold,
+      jumpOutNumber,
+      deepInNumber,
+      clientPeriodHigh,
+      clientPeriodMid,
+      clientPeriodLow,
+      clientPeriodSleep
+    )
+    SaveData.saveData(finalData)
+
+    GetNewData.clearTable()
     sql("TRUNCATE TABLE sniffer.client")
   }
 }

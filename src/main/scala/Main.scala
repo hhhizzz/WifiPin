@@ -15,16 +15,16 @@ object Main {
   val dbURL = "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false"
   val dbUser = "root"
   val dbPasswd = "123456" //****
-//  val spark = SparkSession
-//    .builder()
-//    .appName("Spark SQL wifiPin")
-//    .enableHiveSupport()
-//    .getOrCreate()
-val spark = SparkSession
-  .builder()
-  .appName("Spark SQL wifiPin")
-    .master("local[2]")
-  .getOrCreate()
+  val spark = SparkSession
+    .builder()
+    .appName("Spark SQL wifiPin")
+    .enableHiveSupport()
+    .getOrCreate()
+//val spark = SparkSession
+//  .builder()
+//  .appName("Spark SQL wifiPin")
+//  .master("local[2]")
+//  .getOrCreate()
 
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")

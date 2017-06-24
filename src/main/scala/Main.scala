@@ -39,7 +39,7 @@ object Main {
     val powerDF = newDataObject.getPowerDF
     clientDF.createOrReplaceTempView("RowClient")
     powerDF.createOrReplaceTempView("RowPower")
-    sql("insert into client select * from client")
+    sql("insert into client select * from RowClient")
 
 
 //    //从power表中获取这段时间内被搜集到了用户

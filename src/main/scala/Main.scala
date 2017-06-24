@@ -34,8 +34,8 @@ object Main {
     val sc = spark.sparkContext
     val ssc = new StreamingContext(sc, Seconds(60))
 
-    val lines = ssc.socketTextStream("localhost", 28889)
-    lines.print()
+    val lines = ssc.fileStream("/dev/null")
+    lines.count().print()
 
     import spark.sql
     sql("use sniffer")

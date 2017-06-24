@@ -1,4 +1,4 @@
-import Main.{dbPasswd, dbUser, dbURL}
+import Main.{dbPasswd, dbUser, dbURL, spark}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.log4j.Logger
 
@@ -6,16 +6,11 @@ import org.apache.log4j.Logger
   * Created by xunixhuang on 22/06/2017.
   */
 class GetNewData {
-  //    val spark = SparkSession
-  //      .builder()
-  //      .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
-  //      .enableHiveSupport()
-  //      .appName("Spark SQL basic example")
-  //      .getOrCreate()
-  val spark: SparkSession = SparkSession
-    .builder()
-    .appName("getNewData")
-    .getOrCreate()
+
+  //  val spark: SparkSession = SparkSession
+  //    .builder()
+  //    .appName("getNewData")
+  //    .getOrCreate()
 
   val log: Logger = Logger.getLogger(getClass.getName)
 

@@ -15,26 +15,31 @@ object Main {
   val dbURL = "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false"
   val dbUser = "root"
   val dbPasswd = "123456"
+  val spark = SparkSession
+    .builder()
+    .config("spark.sql.warehouse.dir", "hdfs://master.com:8020/apps/hive/warehouse")
+    .enableHiveSupport()
+    .appName("Spark SQL wifiPin")
+    .getOrCreate()
 
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
     val conf = new SparkConf().setAppName("WifiPin")
     val sc = new SparkContext(conf)
-    //
-    //    import spark.implicits._
-    //    import spark.sql
-    //    sql("use sniffer")
+
+
+    import spark.implicits._
+    import spark.sql
+    sql("use sniffer")
     val newDataObject = new GetNewData()
-    val spark = SparkSession
-      .builder()
-      .appName("Spark Main")
-      .getOrCreate()
+
 
     val clientDF = newDataObject.getClientDF
     val powerDF = newDataObject.getPowerDF
     clientDF.createOrReplaceTempView("client")
     powerDF.createOrReplaceTempView("power")
+    sql("insert into sniffer.client select * from client")
 
 
     //从power表中获取这段时间内被搜集到了用户

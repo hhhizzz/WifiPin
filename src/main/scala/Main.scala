@@ -24,8 +24,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
-    val sc = spark.sparkContext
-    val sqlContext = new org.apache.spark.sql.hive.HiveContext(sc)
+    //val sc = spark.sparkContext
 
 
     import spark.implicits._
@@ -38,7 +37,7 @@ object Main {
     val powerDF = newDataObject.getPowerDF
     clientDF.createOrReplaceTempView("RowClient")
     powerDF.createOrReplaceTempView("RowPower")
-    sqlContext.sql("insert into client select * from RowClient")
+    sql("insert into client select * from RowClient")
 
 
     //    //从power表中获取这段时间内被搜集到了用户

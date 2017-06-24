@@ -22,27 +22,27 @@ object Main {
     .appName("Spark SQL wifiPin")
     .enableHiveSupport()
     .getOrCreate()
-//val spark = SparkSession
-//  .builder()
-//  .appName("Spark SQL wifiPin")
-//  .master("local[2]")
-//  .getOrCreate()
+  //val spark = SparkSession
+  //  .builder()
+  //  .appName("Spark SQL wifiPin")
+  //  .master("local[2]")
+  //  .getOrCreate()
 
   def main(args: Array[String]): Unit = {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
     val sc = spark.sparkContext
-    val ssc = new StreamingContext(sc,Seconds(60))
+    val ssc = new StreamingContext(sc, Seconds(60))
 
 
     import spark.sql
-    //sql("use sniffer")
+    sql("use sniffer")
 
 
     val clientDF = GetNewData.getClientDF
     val powerDF = GetNewData.getPowerDF
     clientDF.createOrReplaceTempView("RowClient") //***
-    powerDF.createOrReplaceTempView("RowPower")   //***
+    powerDF.createOrReplaceTempView("RowPower") //***
     sql("insert into client select * from RowClient")
     sql("insert into power select * from RowPower")
 
@@ -140,7 +140,7 @@ object Main {
     println("The sleep activity client is " + clientPeriodSleep)
 
     //找出数据搜集时间
-   // val finaltime = sql("SELECT max(time) FROM client")
+    // val finaltime = sql("SELECT max(time) FROM client")
     //定义最终数据结构
     val finalData = Data(
       new Date().getTime / 1000,
@@ -161,8 +161,9 @@ object Main {
     SaveData.saveData(finalData)
 
     GetNewData.clearTable()
-    sql("TRUNCATE TABLE sniffer.client")
-    ssc.start()             // Start the computation
-    ssc.awaitTermination()  // Wait for the computation to terminate
+    sql("TRUNCATE TABLE client")
+    
+    ssc.start() // Start the computation
+    ssc.awaitTermination() // Wait for the computation to terminate
   }
 }

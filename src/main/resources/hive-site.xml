@@ -1,0 +1,7 @@
+<configuration>
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://master.com:9083</value>
+        <description>thrift URI</description>
+    </property>
+</configuration>

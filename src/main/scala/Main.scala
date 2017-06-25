@@ -49,20 +49,22 @@ object Main {
 
     //将power数据插入hive
     powerArrays.foreachRDD { rdd =>
-
-      val powerDF = spark.read.json(rdd)
-      powerDF.createOrReplaceTempView("RowPower")
-      powerDF.show()
-      sql("insert into power select sniffer,client,power,time from RowPower")
+      if(rdd.count()!=0){
+        val powerDF = spark.read.json(rdd)
+        powerDF.createOrReplaceTempView("RowPower")
+        powerDF.show()
+        sql("insert into power select sniffer,client,power,time from RowPower")
+      }
     }
 
     //将client数据插入hive并进行计算
     clientArrays.foreachRDD { rdd =>
-
-      val clientDF = spark.read.json(rdd)
-      clientDF.createOrReplaceTempView("RowClient")
-      clientDF.show()
-      sql("insert into client select sniffer,client,power,time from RowClient")
+      if(rdd.count()!=0) {
+        val clientDF = spark.read.json(rdd)
+        clientDF.createOrReplaceTempView("RowClient")
+        clientDF.show()
+        sql("insert into client select sniffer,client,power,time from RowClient")
+      }
 
 
       //从power表中获取这段时间内被搜集到了用户

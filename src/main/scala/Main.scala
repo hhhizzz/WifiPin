@@ -53,7 +53,7 @@ object Main {
       val powerDF = spark.read.json(rdd)
       powerDF.createOrReplaceTempView("RowPower")
       powerDF.show()
-      sql("insert into power select * from RowPower")
+      sql("insert into power select sniffer,client,power,time from RowPower")
     }
 
     //将client数据插入hive并进行计算
@@ -62,7 +62,7 @@ object Main {
       val clientDF = spark.read.json(rdd)
       clientDF.createOrReplaceTempView("RowClient")
       clientDF.show()
-      sql("insert into client select * from RowClient")
+      sql("insert into client select sniffer,client,power,time from RowClient")
 
 
       //从power表中获取这段时间内被搜集到了用户

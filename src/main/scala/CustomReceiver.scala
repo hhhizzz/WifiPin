@@ -30,6 +30,9 @@ class CustomReceiver(url: String)
   /** Create a socket connection and receive data until receiver is stopped */
   private def receive() {
     try {
+      while(true){
+
+      }
       val connection = new URL(url).openConnection.asInstanceOf[HttpURLConnection]
       connection.setConnectTimeout(2000)
       connection.setReadTimeout(2000)
@@ -38,7 +41,10 @@ class CustomReceiver(url: String)
       val content = io.Source.fromInputStream(inputStream).mkString
       if (inputStream != null) inputStream.close()
       store(content)
-      restart("Trying to connect again")
+      Thread.sleep(30000)
+      if (!isStopped()) {
+        restart("Trying to connect again")
+      }
     }
     catch {
       case e: java.net.ConnectException =>
@@ -47,6 +53,9 @@ class CustomReceiver(url: String)
       case t: Throwable =>
         // restart if there is any other error
         restart("Error receiving data", t)
+    }
+    finally {
+      onStop()
     }
   }
 }

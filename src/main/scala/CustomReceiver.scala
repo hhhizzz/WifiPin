@@ -39,7 +39,7 @@ class CustomReceiver(url: String)
       if (inputStream != null) inputStream.close()
       store(content)
       println("stored")
-      Thread.sleep(30000)
+      Thread.sleep(60000)
       if (!isStopped()) {
         restart("Trying to connect again")
       }

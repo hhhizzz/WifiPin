@@ -52,7 +52,6 @@ object Main {
       if (rdd.count() != 0) {
         val powerDF = spark.read.json(rdd)
         powerDF.createOrReplaceTempView("RowPower")
-        powerDF.show()
         sql("insert into power select sniffer,client,power,time from RowPower")
       }
     }
@@ -62,7 +61,6 @@ object Main {
       if (rdd.count() != 0) {
         val clientDF = spark.read.json(rdd)
         clientDF.createOrReplaceTempView("RowClient")
-        clientDF.show()
         sql("insert into client select sniffer,client,power,time from RowClient")
 
 

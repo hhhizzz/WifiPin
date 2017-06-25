@@ -41,7 +41,8 @@ class CustomReceiver(url: String)
       val content = io.Source.fromInputStream(inputStream).mkString
       if (inputStream != null) inputStream.close()
       store(content)
-      Thread.sleep(30)
+      println("stored")
+      Thread.sleep(30000)
       if (!isStopped()) {
         restart("Trying to connect again")
       }

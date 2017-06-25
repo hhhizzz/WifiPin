@@ -75,6 +75,7 @@ object Main {
       //计算用户停留时间和这段时间的平均信号强度
       val clientHoldDF = spark.sql("SELECT\n  client,\n  MAX(time) - MIN(time) hold,\n  AVG(power) average_power\nFROM clientPower GROUP BY client")
       clientHoldDF.createOrReplaceTempView("clientHold")
+      clientHoldDF.show()
       //    +-----------------+----+-------------------+
       //    |           client|hold|      average_power|
       //    +-----------------+----+-------------------+

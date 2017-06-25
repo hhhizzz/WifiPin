@@ -113,6 +113,8 @@ object Main {
 
         //计算来访周期，-1表示没有老客户
         val periodNeedDF = clientPeriodDF.filter(row => row.getInt(1) > 3600)
+        periodNeedDF.show()
+
         periodNeedDF.createOrReplaceTempView("periodNeed")
         val periodSumDF = spark.sql("SELECT AVG(time_diff) FROM periodNeed")
         var period = -1.0

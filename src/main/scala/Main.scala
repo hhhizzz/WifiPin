@@ -52,6 +52,7 @@ object Main {
 
       val powerDF = spark.read.json(rdd)
       powerDF.createOrReplaceTempView("RowPower")
+      powerDF.show()
       sql("insert into power select * from RowPower")
     }
 
@@ -60,6 +61,7 @@ object Main {
 
       val clientDF = spark.read.json(rdd)
       clientDF.createOrReplaceTempView("RowClient")
+      clientDF.show()
       sql("insert into client select * from RowClient")
 
 
@@ -75,7 +77,6 @@ object Main {
       //计算用户停留时间和这段时间的平均信号强度
       val clientHoldDF = spark.sql("SELECT\n  client,\n  MAX(time) - MIN(time) hold,\n  AVG(power) average_power\nFROM clientPower GROUP BY client")
       clientHoldDF.createOrReplaceTempView("clientHold")
-      clientHoldDF.show()
       //    +-----------------+----+-------------------+
       //    |           client|hold|      average_power|
       //    +-----------------+----+-------------------+

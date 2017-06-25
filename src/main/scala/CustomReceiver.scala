@@ -30,9 +30,6 @@ class CustomReceiver(url: String)
   /** Create a socket connection and receive data until receiver is stopped */
   private def receive() {
     try {
-      while(true){
-
-      }
       val connection = new URL(url).openConnection.asInstanceOf[HttpURLConnection]
       connection.setConnectTimeout(2000)
       connection.setReadTimeout(2000)

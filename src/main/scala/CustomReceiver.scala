@@ -38,6 +38,7 @@ class CustomReceiver(url: String)
       val content = io.Source.fromInputStream(inputStream).mkString
       if (inputStream != null) inputStream.close()
       store(content)
+      restart("Trying to connect again")
     }
     catch {
       case e: java.net.ConnectException =>

@@ -1,4 +1,5 @@
 import org.apache.log4j.Logger
+import Main.{dbPasswd, dbUser, dbURL}
 
 /**
   * Created by xunixhuang on 24/06/2017.
@@ -24,9 +25,6 @@ object SaveData {
   def saveData(data: Data): Unit = {
     import java.sql._
 
-    val dbURL = "jdbc:mysql://slave2.com/?useUnicode=true&characterEncoding=utf-8&useSSL=false"
-    val dbUser = "root"
-    val dbPasswd = "123456" //****
     var conn: Connection = null
     var stmt: Statement = null
 

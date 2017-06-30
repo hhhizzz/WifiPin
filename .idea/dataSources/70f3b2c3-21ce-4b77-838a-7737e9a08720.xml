@@ -10,196 +10,197 @@
     <schema id="4" parent="1" name="mysql"/>
     <schema id="5" parent="1" name="performance_schema"/>
     <schema id="6" parent="1" name="sys"/>
-    <table id="7" parent="2" name="client"/>
-    <table id="8" parent="2" name="connection"/>
-    <table id="9" parent="2" name="data"/>
-    <table id="10" parent="2" name="history"/>
-    <table id="11" parent="2" name="oui"/>
-    <table id="12" parent="2" name="power"/>
-    <column id="13" parent="7" name="sniffer">
+    <schema id="7" parent="1" name="hive"/>
+    <table id="8" parent="2" name="client"/>
+    <table id="9" parent="2" name="connection"/>
+    <table id="10" parent="2" name="data"/>
+    <table id="11" parent="2" name="history"/>
+    <table id="12" parent="2" name="oui"/>
+    <table id="13" parent="2" name="power"/>
+    <column id="14" parent="8" name="sniffer">
       <Position>1</Position>
       <DataType>varchar(16)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="7" name="client">
+    <column id="15" parent="8" name="client">
       <Position>2</Position>
       <DataType>varchar(17)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="7" name="power">
+    <column id="16" parent="8" name="power">
       <Position>3</Position>
       <DataType>int(4)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="7" name="time">
+    <column id="17" parent="8" name="time">
       <Position>4</Position>
       <DataType>int(32)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="17" parent="7" name="PRIMARY">
+    <key id="18" parent="8" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sniffer
 client
 time</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="18" parent="8" name="sniffer">
+    <column id="19" parent="9" name="sniffer">
       <Position>1</Position>
       <DataType>varchar(16)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="19" parent="8" name="client">
+    <column id="20" parent="9" name="client">
       <Position>2</Position>
       <DataType>varchar(17)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="20" parent="8" name="bssid">
+    <column id="21" parent="9" name="bssid">
       <Position>3</Position>
       <DataType>varchar(17)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="21" parent="8" name="essid">
+    <column id="22" parent="9" name="essid">
       <Position>4</Position>
       <DataType>varchar(32)|0</DataType>
     </column>
-    <column id="22" parent="8" name="time">
+    <column id="23" parent="9" name="time">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <key id="23" parent="8" name="PRIMARY">
+    <key id="24" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sniffer
 client
 bssid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="24" parent="9" name="time">
+    <column id="25" parent="10" name="time">
       <Position>1</Position>
       <DataType>int(32)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="25" parent="9" name="username">
+    <column id="26" parent="10" name="username">
       <Position>2</Position>
       <DataType>varchar(32)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="26" parent="9" name="clientNumber">
+    <column id="27" parent="10" name="clientNumber">
       <Position>3</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="27" parent="9" name="InputClient">
+    <column id="28" parent="10" name="InputClient">
       <Position>4</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="28" parent="9" name="Period">
+    <column id="29" parent="10" name="Period">
       <Position>5</Position>
       <DataType>double|0</DataType>
     </column>
-    <column id="29" parent="9" name="oldClient">
+    <column id="30" parent="10" name="oldClient">
       <Position>6</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="30" parent="9" name="newClient">
+    <column id="31" parent="10" name="newClient">
       <Position>7</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="31" parent="9" name="holdTime">
+    <column id="32" parent="10" name="holdTime">
       <Position>8</Position>
       <DataType>double|0</DataType>
     </column>
-    <column id="32" parent="9" name="jumpOut">
+    <column id="33" parent="10" name="jumpOut">
       <Position>9</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="33" parent="9" name="deepIn">
+    <column id="34" parent="10" name="deepIn">
       <Position>10</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="34" parent="9" name="highActivity">
+    <column id="35" parent="10" name="highActivity">
       <Position>11</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="35" parent="9" name="midActivity">
+    <column id="36" parent="10" name="midActivity">
       <Position>12</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="36" parent="9" name="lowActivity">
+    <column id="37" parent="10" name="lowActivity">
       <Position>13</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="37" parent="9" name="sleepActivity">
+    <column id="38" parent="10" name="sleepActivity">
       <Position>14</Position>
       <DataType>int(10)|0</DataType>
     </column>
-    <key id="38" parent="9" name="PRIMARY">
+    <key id="39" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>time
 username</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="39" parent="10" name="sniffer">
+    <column id="40" parent="11" name="sniffer">
       <Position>1</Position>
       <DataType>varchar(16)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="40" parent="10" name="client">
+    <column id="41" parent="11" name="client">
       <Position>2</Position>
       <DataType>varchar(17)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="10" name="essid">
+    <column id="42" parent="11" name="essid">
       <Position>3</Position>
       <DataType>varchar(32)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="42" parent="10" name="time">
+    <column id="43" parent="11" name="time">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <key id="43" parent="10" name="PRIMARY">
+    <key id="44" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sniffer
 client
 essid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="44" parent="11" name="id">
+    <column id="45" parent="12" name="id">
       <Position>1</Position>
       <DataType>varchar(8)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="45" parent="11" name="vendor">
+    <column id="46" parent="12" name="vendor">
       <Position>2</Position>
       <DataType>text|0</DataType>
     </column>
-    <key id="46" parent="11" name="PRIMARY">
+    <key id="47" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="47" parent="12" name="sniffer">
+    <column id="48" parent="13" name="sniffer">
       <Position>1</Position>
       <DataType>varchar(16)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="48" parent="12" name="client">
+    <column id="49" parent="13" name="client">
       <Position>2</Position>
       <DataType>varchar(17)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="49" parent="12" name="power">
+    <column id="50" parent="13" name="power">
       <Position>3</Position>
       <DataType>int(4)|0</DataType>
     </column>
-    <column id="50" parent="12" name="time">
+    <column id="51" parent="13" name="time">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="51" parent="12" name="PRIMARY">
+    <key id="52" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sniffer
 client

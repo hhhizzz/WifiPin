@@ -41,7 +41,7 @@ object Main {
     sql("use sniffer")
 
 
-    val lines = ssc.receiverStream(new CustomReceiver("http://10.1.0.7"))
+    val lines = ssc.receiverStream(new CustomReceiver("http://10.1.2.9"))
     val jsonLines = lines.map(line => new JSONObject(line))
     val clientArrays = jsonLines.map(json => json.getJSONArray("client").toString)
     val powerArrays = jsonLines.map(json => json.getJSONArray("power").toString)

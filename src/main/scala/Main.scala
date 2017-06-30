@@ -34,7 +34,7 @@ object Main {
     val log = LogManager.getLogger("org")
     log.setLevel(Level.WARN) //把日志记录调整为WARN级别，以减少输出
     val sc = spark.sparkContext
-    val ssc = new StreamingContext(sc, Seconds(60))
+    val ssc = new StreamingContext(sc, Seconds(10))
 
 
     import spark.sql
